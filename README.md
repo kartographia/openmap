@@ -1,5 +1,5 @@
 # OpenMap
-Java library used read/write shapefiles. Most of the code comes courtesy of [OpenMap](https://github.com/OpenMap-java/openmap).
+Java library used read/write shapefiles. This is a stripped down version of the official [OpenMap Project](https://github.com/OpenMap-java/openmap).
 All we have done here is to strip away all the rendering and UI code and provide a simple library to read and write shapefiles.
 
 
