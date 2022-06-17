@@ -209,6 +209,18 @@ public class ShapeFile {
 
 
   //**************************************************************************
+  //** getGeometries
+  //**************************************************************************
+  /** Used to iterate through the geometries (aka shapes) in the shapefile. Be
+   *  sure to iterate through all the records so that the input streams close
+   *  correctly.
+   */
+    public Iterator<Geometry> getGeometries() throws Exception {
+        return new ShapeIterator(new FileInputStream(shp));
+    }
+
+
+  //**************************************************************************
   //** delete
   //**************************************************************************
   /** Used to delete the shapefile
