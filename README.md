@@ -33,11 +33,12 @@ public class Main {
 
 
 # Dependencies
-This library relies on JTS. Specifically, jts-1.13.jar which is the last standalone releases of JTS.
+This library relies on [JTS](https://github.com/locationtech/jts) to represent
+geometries (point, line, polygon, etc). 
 
 
 # Java Compatibility
-This library has been tested and used with Java 1.8 although it should work with Java 1.6 and up.
+This library has been tested and used with Java 1.8 and up.
 
 
 # License
