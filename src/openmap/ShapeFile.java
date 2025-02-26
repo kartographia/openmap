@@ -3,7 +3,7 @@ import static com.bbn.openmap.dataAccess.shape.ShapeConstants.*;
 import com.bbn.openmap.dataAccess.shape.input.*;
 import com.bbn.openmap.dataAccess.shape.output.*;
 
-import com.vividsolutions.jts.geom.*;
+import org.locationtech.jts.geom.*;
 
 import java.io.*;
 import java.util.*;

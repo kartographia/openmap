@@ -1,5 +1,5 @@
 package openmap;
-import com.vividsolutions.jts.geom.*;
+import org.locationtech.jts.geom.*;
 
 public class Record {
 

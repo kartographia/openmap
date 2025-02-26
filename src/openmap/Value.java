@@ -1,12 +1,12 @@
 package openmap;
-import com.vividsolutions.jts.geom.Geometry;
+import org.locationtech.jts.geom.*;
 
 //******************************************************************************
 //**  Value Class
 //******************************************************************************
 /**
  *   A general purpose wrapper for Objects. The value can be converted into a
- *   number of Java primatives including strings, integers, doubles, booleans,
+ *   number of Java primitives including strings, integers, doubles, booleans,
  *   etc.
  *
  ******************************************************************************/
@@ -42,7 +42,12 @@ public class Value {
             return Integer.valueOf(prepNumber(value+""));
         }
         catch(Exception e){
-            return null;
+            try{
+                return (int) Math.round(toDouble());
+            }
+            catch(Exception ex){
+                return null;
+            }
         }
     }
 
