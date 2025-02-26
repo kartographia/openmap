@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project
+    xmlns="http://maven.apache.org/POM/4.0.0"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <maven.compiler.source>1.8</maven.compiler.source>
+        <maven.compiler.target>1.8</maven.compiler.target>
+        <exec.mainClass>openmap.Main</exec.mainClass>
+
+        <!-- Ant-style directory layout -->
+        <src.dir>src</src.dir>
+
+    </properties>
+
+
+
+  <!-- =========================================================== -->
+  <!--     Module Description                                      -->
+  <!-- =========================================================== -->
+    <groupId>kartographia</groupId>
+    <artifactId>openmap</artifactId>
+    <version>1.0.0</version>
+    <packaging>jar</packaging>
+
+
+
+  <!-- =========================================================== -->
+  <!--     Dependency Management                                   -->
+  <!-- =========================================================== -->
+
+    <dependencies>
+
+      <!-- JTS (geospatial utils) -->
+      <dependency>
+        <groupId>org.locationtech.jts</groupId>
+        <artifactId>jts-core</artifactId>
+        <version>1.17.1</version>
+      </dependency>
+
+    </dependencies>
+
+
+
+  <!-- =========================================================== -->
+  <!--     Build Info                                              -->
+  <!-- =========================================================== -->
+  <build>
+
+        <sourceDirectory>${src.dir}</sourceDirectory>
+
+
+        <plugins>
+
+            <!-- Copy dependencies into the lib folder -->
+            <plugin>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <phase>install</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+
+            <!-- Create main app -->
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <classpathPrefix>lib/</classpathPrefix>
+                            <mainClass>openmap.Main</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                          <Built-By>Kartographia LLC</Built-By>
+                          <Bundle-Name>OpenMap</Bundle-Name>
+                          <Bundle-Version>${project.version}</Bundle-Version>
+                          <Bundle-Date>${buildDate}</Bundle-Date>
+                          <Implementation-Title>OpenMap</Implementation-Title>
+                          <Implementation-Version>${project.version}</Implementation-Version>
+                          <Implementation-URL>https://github.com/kartographia/openmap</Implementation-URL>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+
+            <!-- copy jars to the dist directory -->
+            <plugin>
+              <groupId>org.apache.maven.plugins</groupId>
+              <artifactId>maven-antrun-plugin</artifactId>
+              <version>1.8</version>
+              <executions>
+                <execution>
+                  <phase>install</phase>
+                  <configuration>
+                    <target>
+                      <move file="${project.build.directory}/${project.artifactId}-${project.version}.jar"
+                            tofile="${project.basedir}/dist/${project.artifactId}-${project.version}.jar" />
+                      <move todir="${project.basedir}/dist/lib" >
+                          <fileset dir="${project.build.directory}/lib" />
+                      </move>
+                    </target>
+                  </configuration>
+                  <goals>
+                    <goal>run</goal>
+                  </goals>
+                </execution>
+              </executions>
+            </plugin>
+
+
+
+      </plugins>
+
+  </build>
+
+</project>
